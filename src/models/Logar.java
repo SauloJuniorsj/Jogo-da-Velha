@@ -45,8 +45,9 @@ public class Logar extends Jogador{
                 String senha2 = rs.getString("senha");
                 
                 if((jogador.getNome() == null ? usuario == null : jogador.getNome().equals(usuario)) && (jogador.getSenha() == null ? senha2 == null : jujuba.equals(senha2))){
-                    System.out.println("\nLogado com sucesso\n bem vindo " + usuario);
-                    jogo.entrarJogo();
+                    System.out.println("\n--------- Logado com sucesso ---------\n"
+                            + "bem vindo " + usuario);
+                    jogo.entrarJogo(jogador);
                 } else {
                     System.out.println("Nome ou Senha incorretos!!");
                 }

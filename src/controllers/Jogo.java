@@ -5,11 +5,15 @@
  */
 package controllers;
 
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import models.Placar;
+
 /**
  *
  * @author Luiz_
  */
-public class Jogo {
+public class Jogo{
     
         private final String[][] matriz = { {"7","8","9"},
                                       {"4","5","6"},
@@ -69,11 +73,12 @@ public class Jogo {
             }
         }
 
-        public String Ganhou(int jogadas){
+        public String Ganhou(int jogadas, controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException{
             String[] poss = new String[8];  //Possibilidades
             String vencedor = "null";
             if (jogadas == 9){
-                vencedor = "- - - D E U  V E L H A ! ! ! - - -";
+               vencedor = "-----------DEU VELHA-------------";
+               return vencedor; 
             }
             //horizontais
             poss[0] = matriz[0][0] + matriz[0][1] + matriz[0][2];
@@ -90,8 +95,14 @@ public class Jogo {
             for (String pos : poss) {
                 if (pos.equals("XXX")) {
                     vencedor = "Jogador 1";
+                    System.out.println("O " + jogador.getNome() + " Venceu !\n");
+                    Placar placar = new Placar();
+                    placar.vitoria(jogador);
                 } else if (pos.equals("OOO")) {
                     vencedor = "Jogador 2";
+                    System.out.println("O " + jogador.getNome() + " Perdeu !\n");
+                    Placar placar = new Placar();
+                    placar.derrota(jogador);
                 }
             }
                 return vencedor;

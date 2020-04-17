@@ -38,8 +38,8 @@ public class Cadastrar extends Jogador {
             String jujuba = String.format("%1$032X", i);
             
             st.executeUpdate("insert into jogador "+// insere no banco
-                    "(nome_jogador,senha)" +
-                    " values ('" + jogador.getNome() + "', '" + jujuba + "')");
+                    "(nome_jogador,senha,vitorias,derrotas)" +
+                    " values ('" + jogador.getNome() + "', '" + jujuba + "',0,0)");
             System.out.println("Cadastro realizado com sucesso");
             Logar entrar = new Logar();
             entrar.Autenticar(jogador);
