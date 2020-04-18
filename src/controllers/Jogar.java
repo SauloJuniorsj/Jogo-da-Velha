@@ -42,11 +42,11 @@ public class Jogar {
             switch(x) {
                 case "um":
                     String y = null;
-                    System.out.println("\nPor questões de segurança sua senha será enviada"
-                            + "ao banco de dados de forma\ncriptograda, esse termo foi criado"
-                            + "para sua própria segurança contra invasão\nao banco de dados e"
-                            + "vazamento de informações, você está de acordo?\nse sim digite --> aceito <--"
-                            + "se não digite --> discordo <--");
+                    System.out.println("\nPor questões de segurança sua senha será enviado"
+                            + " ao banco de dados de forma\ncriptografada, esse termo foi criado"
+                            + " para sua própria segurança contra invasão\nao banco de dados e"
+                            + " vazamento de informações, você está de acordo?\nSe sim digite --> aceito <--"
+                            + " se não digite --> discordo <--");
                             y = termo.nextLine();
                     switch(y){
                         case "aceito": 

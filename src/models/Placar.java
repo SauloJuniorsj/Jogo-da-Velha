@@ -18,6 +18,21 @@ import java.sql.Statement;
  * @author Luiz_
  */
 public class Placar extends Jogador{
+    
+    public void mostrarPlacar(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+        
+        Conexao con = new Conexao();
+        Statement st = con.conexao.createStatement();
+        ResultSet rs = st.executeQuery("SELECT * FROM jogador WHERE nome_jogador = '" + jogador.getNome() + "'");
+        
+        while(rs.next()) {
+            String vitoria = rs.getString("vitorias");
+            String derrota = rs.getString("derrotas");   
+            System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console
+            Jogar jogo = new Jogar();
+            jogo.entrarJogo(jogador);
+        }
+    }
         
     public void vitoria(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
         

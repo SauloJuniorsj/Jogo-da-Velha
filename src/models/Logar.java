@@ -28,7 +28,9 @@ public class Logar extends Jogador{
        if(jogador.getNome()!= null && jogador.getSenha() != null && !jogador.getNome().isEmpty() && !jogador.getSenha().isEmpty()){
            
             Conexao con = new Conexao();
+            Placar placar = new Placar();
             Jogar jogo = new Jogar();   
+            Statement st = con.conexao.createStatement();
             
             MessageDigest senhaCriptografada=MessageDigest.getInstance("MD5");//criptografa a senha
             
@@ -36,10 +38,10 @@ public class Logar extends Jogador{
             senhaCriptografada.update(senhabytes,0,senhabytes.length);
             BigInteger i = new BigInteger(1,senhaCriptografada.digest());
             String jujuba = String.format("%1$032X", i);
-            Statement st = con.conexao.createStatement();
+            
             
             ResultSet rs = st.executeQuery("Select * from jogador where nome_jogador = '" + jogador.getNome()+"'"
-                                           + "and senha = '"+ jujuba +"'");
+                                           + " and senha = '"+ jujuba +"'");
             
             while(rs.next()){
                 String usuario = rs.getString("nome_jogador");
@@ -48,6 +50,7 @@ public class Logar extends Jogador{
                 if((jogador.getNome() == null ? usuario == null : jogador.getNome().equals(usuario)) && (jogador.getSenha() == null ? senha2 == null : jujuba.equals(senha2))){
                     System.out.println("\n--------- Logado com sucesso ---------\n"
                             + "bem vindo " + usuario);
+                    placar.mostrarPlacar(jogador);
                     jogo.entrarJogo(jogador);
                 } else {
                     System.out.println("Nome ou Senha incorretos!!");

@@ -34,7 +34,9 @@ public class Cadastrar extends Jogador {
                     System.out.println("Nome de cadastro em uso!");
                     Jogar cadastro = new Jogar();
                     cadastro.menuJogo();
-                } else if(!jogador.getSenha().equals(jogador.getConf_Senha())){
+                } 
+        }
+                if (!jogador.getSenha().equals(jogador.getConf_Senha())){
                     //verifica se as variaveis senha1 e senha 2 sao iguais
                     System.out.println("SENHAS DIFERENTES");
                     Jogar cadastro = new Jogar();
@@ -59,6 +61,5 @@ public class Cadastrar extends Jogador {
                     Logar entrar = new Logar();
                     entrar.Autenticar(jogador);
                 }
-        }
     }
 }
