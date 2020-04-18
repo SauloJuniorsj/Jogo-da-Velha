@@ -1,3 +1,4 @@
+/*finalizado*/
 package views;
 
 import controllers.Jogar;

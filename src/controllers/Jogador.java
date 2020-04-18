@@ -1,3 +1,4 @@
+/*finalizado*/
 package controllers;
 
 public class Jogador {
