@@ -31,16 +31,16 @@ public class Jogar {
         Cadastrar cadastro = new Cadastrar();
         
         String x = null;
-        while(!"sair".equals(x)){
+        while(!"3".equals(x)){
             System.out.println("\n");
             System.out.println("JOGO DA VELHA");
-            System.out.println("Cadastrar digite um");
-            System.out.println("Jogar digite dois");
-            System.out.println("Sair digite sair");
+            System.out.println("Cadastrar ( 1 )");
+            System.out.println("Jogar ( 2 )");
+            System.out.println("Sair ( 3 )");
             x = escolha.nextLine();
             
             switch(x) {
-                case "um":
+                case "1":
                     String y = null;
                     System.out.println("\nPor questões de segurança sua senha será enviado"
                             + " ao banco de dados de forma\ncriptografada, esse termo foi criado"
@@ -71,7 +71,7 @@ public class Jogar {
                      
                     break;
                     
-                case "dois":
+                case "2":
                      System.out.println("---------- Login -----------\n");
                      System.out.println("Nome: ");
                      jogador.setNome(nome.nextLine());
@@ -80,15 +80,15 @@ public class Jogar {
                      login.Autenticar(jogador);       
                     break;
                     
-                case "sair":
+                case "3":
                         exit();
                     break;
                     
                 default: 
                     System.out.println("\nPor favor, digite conforme as opções do menu\n"
-                            + "um <-- Para cadastrar\n"
-                            + "dois <-- Para logar\n"
-                            + "sair <-- Para sair");
+                            + "1 <-- Para cadastrar\n"
+                            + "2 <-- Para logar\n"
+                            + "3 <-- Para sair");
             }
         }
     }
@@ -102,9 +102,13 @@ public class Jogar {
         
         do{
             System.out.println("quer jogar contra player ou contra pc?");
-            System.out.println("Player (1)");
-            System.out.println("PC (2)");
+            System.out.println("Player ( 1 )");
+            System.out.println("PC ( 2 )");
+            System.out.println("Sair( 3 )");
             valida = ler.nextInt();
+            if(valida == 3){
+                menuJogo();
+            }
 
         }while(valida != 1 && valida != 2);
 
