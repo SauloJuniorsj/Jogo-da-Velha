@@ -42,7 +42,7 @@ public class Jogar {
             switch(x) {
                 case "um":
                     String y = null;
-                    System.out.println("Por questões de segurança sua senha será enviada"
+                    System.out.println("\nPor questões de segurança sua senha será enviada"
                             + "ao banco de dados de forma\ncriptograda, esse termo foi criado"
                             + "para sua própria segurança contra invasão\nao banco de dados e"
                             + "vazamento de informações, você está de acordo?\nse sim digite --> aceito <--"
@@ -64,7 +64,9 @@ public class Jogar {
                             break;
                             
                         default: 
-                            System.out.println("Comando Inválido!!");
+                            System.out.println("\nPor favor, digite conforme as opções\n"
+                                    + "aceito <-- Para continuar com o cadastro\n"
+                                    + "discordo <-- Para finalizar");
                     }
                      
                     break;
@@ -83,7 +85,10 @@ public class Jogar {
                     break;
                     
                 default: 
-                    System.out.println("Comando Inválido!!");
+                    System.out.println("\nPor favor, digite conforme as opções do menu\n"
+                            + "um <-- Para cadastrar\n"
+                            + "dois <-- Para logar\n"
+                            + "sair <-- Para sair");
             }
         }
     }
