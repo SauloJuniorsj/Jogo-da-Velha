@@ -96,12 +96,12 @@ public class Jogo{
             for (String pos : poss) {
                 if (pos.equals("XXX")) {
                     vencedor = "Jogador 1";
-                    System.out.println("O " + jogador.getNome() + " Venceu !\n");
+                    System.out.println(jogador.getNome() + " Venceu !\n");
                     Placar placar = new Placar();
                     placar.vitoria(jogador);
                 } else if (pos.equals("OOO")) {
                     vencedor = "Jogador 2";
-                    System.out.println("O " + jogador.getNome() + " Perdeu !\n");
+                    System.out.println(jogador.getNome() + " Perdeu !\n");
                     Placar placar = new Placar();
                     placar.derrota(jogador);
                 }

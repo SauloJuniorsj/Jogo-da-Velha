@@ -30,26 +30,26 @@ public class Jogar {
         Logar login = new Logar();
         Cadastrar cadastro = new Cadastrar();
         
-        int x = 0;
-        while(x != 3){
+        String x = null;
+        while(!"sair".equals(x)){
             System.out.println("\n");
             System.out.println("JOGO DA VELHA");
-            System.out.println("Cadastrar ( 1 )");
-            System.out.println("Jogar ( 2 )");
-            System.out.println("Sair ( 3 )");
-            x = escolha.nextInt();
+            System.out.println("Cadastrar digite um");
+            System.out.println("Jogar digite dois");
+            System.out.println("Sair digite sair");
+            x = escolha.nextLine();
             
             switch(x) {
-                case 1:
-                    int y = 0;
+                case "um":
+                    String y = null;
                     System.out.println("Por questões de segurança sua senha será enviada"
                             + "ao banco de dados de forma\ncriptograda, esse termo foi criado"
                             + "para sua própria segurança contra invasão\nao banco de dados e"
-                            + "vazamento de informações, você está de acordo?\nse sim digite 1 "
-                            + "se não digite 2");
-                    y = termo.nextInt();
+                            + "vazamento de informações, você está de acordo?\nse sim digite --> aceito <--"
+                            + "se não digite --> discordo <--");
+                            y = termo.nextLine();
                     switch(y){
-                        case 1: 
+                        case "aceito": 
                             System.out.println("Digite seu nome: ");
                             jogador.setNome(nome.nextLine());//joga o nome pra dentro do metodo SETNOME
                             System.out.println("Digite sua senha: ");
@@ -59,7 +59,7 @@ public class Jogar {
                             cadastro.recebeDados(jogador);
                             break;
                         
-                        case 2:
+                        case "discordo":
                             menuJogo();
                             break;
                             
@@ -69,7 +69,7 @@ public class Jogar {
                      
                     break;
                     
-                case 2:
+                case "dois":
                      System.out.println("---------- Login -----------\n");
                      System.out.println("Nome: ");
                      jogador.setNome(nome.nextLine());
@@ -78,7 +78,7 @@ public class Jogar {
                      login.Autenticar(jogador);       
                     break;
                     
-                case 3:
+                case "sair":
                         exit();
                     break;
                     
