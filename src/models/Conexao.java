@@ -1,4 +1,3 @@
-/*finalizado*/
 package models;
 
 import java.sql.Connection;
@@ -8,10 +7,10 @@ import java.sql.SQLException;
 public class Conexao {
     //cria conexao com banco de dados
     String serverName = "remotemysql.com"; //caminho do servidor BD
-    String mydatabase = "wqlc7LHLWH"; //nome do banco de dados
+    String mydatabase = "abrlFX5cl5"; //nome do banco de dados
     String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
-    String username = "wqlc7LHLWH"; //nome do usuario do bd
-    String password = "r3SIPULcYY"; //senha do banco
+    String username = "abrlFX5cl5"; //nome do usuario do bd
+    String password = "gWJZHn3JEf"; //senha do banco
     
     public Connection conexao;
   
