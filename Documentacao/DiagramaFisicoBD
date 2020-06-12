@@ -1,9 +1,9 @@
 /* Lógico_1: */
 
-CREATE TABLE Jogador (
-    jogador_id int primary key,
+CREATE TABLE jogador (
+    jogador_id int primary key AUTO_INCREMENT,
     nome_jogador varchar(50),
-    Senha varchar(30),
-    vitoria int,
-    derrota int
+    Senha varchar(50),
+    vitorias int,
+    derrotas int    
 );
