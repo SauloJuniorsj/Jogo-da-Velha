@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="interfaceafugauyfa.PainelfrontalController">
+<AnchorPane id="AnchorPane" fx:id="telaInicial" prefHeight="302.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="interfaceGame.PainelfrontalController">
    <children>
-      <Button layoutX="258.0" layoutY="115.0" mnemonicParsing="false" text="Button" />
+      <ImageView fitHeight="477.0" fitWidth="454.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@background.jpeg" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <TextField fx:id="nome_field" layoutX="98.0" layoutY="87.0" promptText="Login" rotate="-6.0" />
+      <PasswordField fx:id="senha_field" layoutX="102.0" layoutY="127.0" promptText="Senha" rotate="-6.0" />
+      <Button fx:id="login_btn" layoutX="113.0" layoutY="216.0" mnemonicParsing="false" onAction="#login" rotate="-6.0" text="Logar" />
+      <Button fx:id="cadastro_btn" layoutX="195.0" layoutY="205.0" mnemonicParsing="false" onAction="#telaCadastro" rotate="-6.0" text="Cadastrar" />
    </children>
 </AnchorPane>
