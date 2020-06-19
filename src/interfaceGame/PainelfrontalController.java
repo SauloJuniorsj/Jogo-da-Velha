@@ -24,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import models.Cadastrar;
 import models.Logar;
+import models.Placar;
 
 /**
  * FXML Controller class
@@ -37,25 +38,40 @@ public class PainelfrontalController implements Initializable {
     @FXML
     public TextField nome_field;
     @FXML
-    private PasswordField senha_field, senha_field_conf;
+    private PasswordField senha_field;
     @FXML
     private AnchorPane telaInicial;
     
     Jogador jogador = new Jogador();
-    
+    Placar placar = new Placar();
+    Jogar jogo = new Jogar();  
     
     
     @FXML
-    private void login() throws NoSuchAlgorithmException{
+    private void login() throws NoSuchAlgorithmException, IOException{
         try{
             Logar login = new Logar();
             jogador.setNome(nome_field.getText());
             jogador.setSenha(senha_field.getText());
-            login.Autenticar(jogador);
+            boolean verific =  login.Autenticar(jogador);
+            if(verific == true){ 
+               telaJogo();
+//               placar.mostrarPlacar(jogador);
+//               jogo.entrarJogo(jogador);
+                   
+            }else{
+                System.out.println("algo deu errado, tentar novamente");
+            }
         }catch(SQLException e){
-            printStackTrace(e);
+            Object printStackTrace = printStackTrace(e);
         }
         
+    }
+    
+    @FXML
+    private void telaJogo() throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/interfaceGame/telaJogo.fxml"));
+            telaInicial.getChildren().setAll(pane);
     }
     
     @FXML

@@ -27,15 +27,7 @@ public class Jogodavelha extends Application{
     }
     
     public static void main(String[] args) {
-        
-        Jogar jogo = new Jogar();
-        
-        try {
             launch(args);
-            jogo.menuJogo();
-        } catch (SQLException | NoSuchAlgorithmException ex) {
-            Logger.getLogger(Jogodavelha.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     

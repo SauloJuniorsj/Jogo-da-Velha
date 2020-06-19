@@ -21,7 +21,7 @@ import java.sql.Statement;
  */
 public class Logar extends Jogador{
     
-    public void Autenticar(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+    public boolean Autenticar(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
     
         
         
@@ -50,8 +50,9 @@ public class Logar extends Jogador{
                 if((jogador.getNome() == null ? usuario == null : jogador.getNome().equals(usuario)) && (jogador.getSenha() == null ? senha2 == null : jujuba.equals(senha2))){
                     System.out.println("\n--------- Logado com sucesso ---------\n"
                             + "bem vindo " + usuario);
-                    placar.mostrarPlacar(jogador);
-                    jogo.entrarJogo(jogador);
+                    return true;
+//                    placar.mostrarPlacar(jogador);
+//                    jogo.entrarJogo(jogador);
                 } else {
                     System.out.println("Nome ou Senha incorretos!!");
                 }
@@ -59,5 +60,6 @@ public class Logar extends Jogador{
        } else {
            System.out.println("Preencha os dados com seu nome e senha de seu cadastro!!");
        }
+       return false;
     }
 }
