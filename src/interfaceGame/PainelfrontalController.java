@@ -13,10 +13,13 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,6 +28,7 @@ import static jdk.nashorn.internal.objects.NativeError.printStackTrace;
 import models.Cadastrar;
 import models.Logar;
 import models.Placar;
+import views.Jogodavelha;
 
 /**
  * FXML Controller class
@@ -45,33 +49,22 @@ public class PainelfrontalController implements Initializable {
     Jogador jogador = new Jogador();
     Placar placar = new Placar();
     Jogar jogo = new Jogar();  
-    
+    TelaJogoController a = new TelaJogoController(); 
     
     @FXML
-    private void login() throws NoSuchAlgorithmException, IOException{
-        try{
-            Logar login = new Logar();
+    protected void login() throws NoSuchAlgorithmException, IOException, SQLException{
+             
             jogador.setNome(nome_field.getText());
             jogador.setSenha(senha_field.getText());
-            boolean verific =  login.Autenticar(jogador);
-            if(verific == true){ 
-               telaJogo();
-//               placar.mostrarPlacar(jogador);
-//               jogo.entrarJogo(jogador);
-                   
-            }else{
-                System.out.println("algo deu errado, tentar novamente");
-            }
-        }catch(SQLException e){
-            Object printStackTrace = printStackTrace(e);
-        }
-        
+            Jogodavelha.mudarTela("telaJogoFXML");
+            a.receberMenu(jogador);
+      
     }
     
-    @FXML
-    private void telaJogo() throws IOException{
+    public void telaJogo() throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/interfaceGame/telaJogo.fxml"));
-            telaInicial.getChildren().setAll(pane);
+        telaInicial.getChildren().setAll(pane);
+     
     }
     
     @FXML

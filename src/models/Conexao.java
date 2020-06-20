@@ -12,9 +12,17 @@ public class Conexao {
     String username = "abrlFX5cl5"; //nome do usuario do bd
     String password = "gWJZHn3JEf"; //senha do banco
     
-    public Connection conexao;
-  
+    public static Connection conexao;
+    
     public Conexao() throws SQLException {
-        conexao = DriverManager.getConnection(url, username, password);
+        
+        if(conexao == null){
+            conexao = DriverManager.getConnection(url, username, password);
+        
+        }
+    }
+    
+    public void closeConnection(){
+        conexao=null;
     }
 }

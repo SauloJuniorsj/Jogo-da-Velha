@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*finalizado*/
+ /*finalizado*/
 package controllers;
 
 import java.security.NoSuchAlgorithmException;
@@ -18,9 +18,9 @@ import models.Logar;
  * @author Luiz_
  */
 public class Jogar {
-    
-    public void menuJogo() throws SQLException, NoSuchAlgorithmException{
-        
+
+    public void menuJogo() throws SQLException, NoSuchAlgorithmException {
+
         Jogador jogador = new Jogador();//instancia um objeto jogador
         Scanner nome = new Scanner(System.in);//instancia um objeto escolha
         Scanner escolha = new Scanner(System.in);//instancia um objeto escolha
@@ -29,17 +29,17 @@ public class Jogar {
         Scanner termo = new Scanner(System.in);
         Logar login = new Logar();
         Cadastrar cadastro = new Cadastrar();
-        
+
         String x = null;
-        while(!"3".equals(x)){
+        while (!"3".equals(x)) {
             System.out.println("\n");
             System.out.println("JOGO DA VELHA");
             System.out.println("Cadastrar ( 1 )");
             System.out.println("Jogar ( 2 )");
             System.out.println("Sair ( 3 )");
             x = escolha.nextLine();
-            
-            switch(x) {
+
+            switch (x) {
                 case "1":
                     String y = null;
                     System.out.println("\nPor questões de segurança sua senha será enviado"
@@ -47,9 +47,9 @@ public class Jogar {
                             + " para sua própria segurança contra invasão\nao banco de dados e"
                             + " vazamento de informações, você está de acordo?\nSe sim digite --> aceito <--"
                             + " se não digite --> discordo <--");
-                            y = termo.nextLine();
-                    switch(y){
-                        case "aceito": 
+                    y = termo.nextLine();
+                    switch (y) {
+                        case "aceito":
                             System.out.println("Digite seu nome: ");
                             jogador.setNome(nome.nextLine());//joga o nome pra dentro do metodo SETNOME
                             System.out.println("Digite sua senha: ");
@@ -58,33 +58,33 @@ public class Jogar {
                             jogador.setConf_Senha(conf_senha.nextLine());//joga a senha pra dentro do metoddo SETSENHA2
                             cadastro.recebeDados(jogador);
                             break;
-                        
+
                         case "discordo":
                             menuJogo();
                             break;
-                            
-                        default: 
+
+                        default:
                             System.out.println("\nPor favor, digite conforme as opções\n"
                                     + "aceito <-- Para continuar com o cadastro\n"
                                     + "discordo <-- Para finalizar");
                     }
-                     
+
                     break;
-                    
+
                 case "2":
-                     System.out.println("---------- Login -----------\n");
-                     System.out.println("Nome: ");
-                     jogador.setNome(nome.nextLine());
-                     System.out.println("Senha: ");
-                     jogador.setSenha(senha.nextLine());
-                     login.Autenticar(jogador);       
+                    System.out.println("---------- Login -----------\n");
+                    System.out.println("Nome: ");
+                    jogador.setNome(nome.nextLine());
+                    System.out.println("Senha: ");
+                    jogador.setSenha(senha.nextLine());
+                    login.Autenticar(jogador);
                     break;
-                    
+
                 case "3":
-                        exit();
+                    exit();
                     break;
-                    
-                default: 
+
+                default:
                     System.out.println("\nPor favor, digite conforme as opções do menu\n"
                             + "1 <-- Para cadastrar\n"
                             + "2 <-- Para logar\n"
@@ -92,128 +92,127 @@ public class Jogar {
             }
         }
     }
-    
-    public void entrarJogo(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException{
-       
-        Scanner ler = new  Scanner(System.in);
+
+    public void entrarJogo(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+
+        Scanner ler = new Scanner(System.in);
         Jogo jogar = new Jogo();
         String posicao;
         int valida = 0, jogada = 0;
-        
-        do{
+
+        do {
             System.out.println("quer jogar contra player ou contra pc?");
             System.out.println("Player ( 1 )");
             System.out.println("PC ( 2 )");
             System.out.println("Sair( 3 )");
             valida = ler.nextInt();
-            if(valida == 3){
+            if (valida == 3) {
                 menuJogo();
             }
 
-        }while(valida != 1 && valida != 2);
+        } while (valida != 1 && valida != 2);
 
-    if(valida == 1){     
-        
-        System.out.println("Jogo começou");
-        jogar.Mostrar();
-      
-            while(true){
-            do{
-                System.out.println(jogador.getNome() + " insira posição: ");
-                posicao = ler.next();
-                while(!jogar.Valida(posicao)){
-                    System.out.println("Jogada inválida");
+        if (valida == 1) {
+
+            System.out.println("Jogo começou");
+            jogar.Mostrar();
+
+            while (true) {
+                do {
                     System.out.println(jogador.getNome() + " insira posição: ");
                     posicao = ler.next();
-                    valida = 0;
-                }
-                jogar.Jogada(posicao, "X");
-                valida = 1;
-                
-            }while(valida == 0); //fim jog 1
-            
+                    while (!jogar.Valida(posicao)) {
+                        System.out.println("Jogada inválida");
+                        System.out.println(jogador.getNome() + " insira posição: ");
+                        posicao = ler.next();
+                        valida = 0;
+                    }
+                    jogar.Jogada(posicao, "X");
+                    valida = 1;
+
+                } while (valida == 0); //fim jog 1
+
                 jogada++;
                 valida = 0;
                 jogar.Mostrar();
-            
-            if(!jogar.Ganhou(jogada, jogador).equals("null")){
-                break;
-            }
-               
-            do{
-                System.out.println("Jogador 2 insira posição: ");
-                posicao = ler.next();
-                while(!jogar.Valida(posicao)){
-                    System.out.println("Jogada inválida");
+
+                if (!jogar.Ganhou(jogada, jogador).equals("null")) {
+                    break;
+                }
+
+                do {
                     System.out.println("Jogador 2 insira posição: ");
                     posicao = ler.next();
-                    valida = 0;
-                }
-                jogar.Jogada(posicao, "O");
-                valida = 1;
-                
-            }while(valida == 0); //fim jog 1
-            
-            jogada++;
-            valida = 0;
-            jogar.Mostrar();
-                
-            if(!jogar.Ganhou(jogada, jogador).equals("null")){
-                break;
-            }
-               
-        }  
-            entrarJogo(jogador);
-        
-        
-            }else {
-                System.out.println("Jogo começou");
-                jogar.Mostrar();
-          
-            while(true){
-                       
-            do{
-                System.out.println(jogador.getNome() + " insira posição: ");
-                posicao = ler.next();
-                while(!jogar.Valida(posicao)){
-                    System.out.println("Jogada inválida");
-                    System.out.println(jogador.getNome() + " insira posição: ");
-                    posicao = ler.next();
-                    valida = 0;
-                }
-                jogar.Jogada(posicao, "X");
-                valida = 1;
-                
-            }while(valida == 0); //fim jog 1
-            
+                    while (!jogar.Valida(posicao)) {
+                        System.out.println("Jogada inválida");
+                        System.out.println("Jogador 2 insira posição: ");
+                        posicao = ler.next();
+                        valida = 0;
+                    }
+                    jogar.Jogada(posicao, "O");
+                    valida = 1;
+
+                } while (valida == 0); //fim jog 1
+
                 jogada++;
                 valida = 0;
                 jogar.Mostrar();
-            
-            if(!jogar.Ganhou(jogada, jogador).equals("null")){
-                break;
-            }
-               
-            do{
-                posicao =  Integer.toString((int)(Math.random() * 10));
-                while(!jogar.Valida(posicao)){
-                    posicao =  Integer.toString((int)(Math.random() * 10));
-                    valida = 0;
+
+                if (!jogar.Ganhou(jogada, jogador).equals("null")) {
+                    break;
                 }
-                jogar.Jogada(posicao, "O");
-                valida = 1;
-                
-            }while(valida == 0); //fim jog 1
+
+            }
+            entrarJogo(jogador);
+
+        } else {
+            System.out.println("Jogo começou");
+            jogar.Mostrar();
+
+            while (true) {
+
+                do {
+                    System.out.println(jogador.getNome() + " insira posição: ");
+                    posicao = ler.next();
+                    while (!jogar.Valida(posicao)) {
+                        System.out.println("Jogada inválida");
+                        System.out.println(jogador.getNome() + " insira posição: ");
+                        posicao = ler.next();
+                        valida = 0;
+                    }
+                    jogar.Jogada(posicao, "X");
+                    valida = 1;
+
+                } while (valida == 0); //fim jog 1
+
+                jogada++;
+                valida = 0;
+                jogar.Mostrar();
+
+                if (!jogar.Ganhou(jogada, jogador).equals("null")) {
+                    break;
+                }
+
+                do {
+                    posicao = Integer.toString((int) (Math.random() * 10));
+                    while (!jogar.Valida(posicao)) {
+                        posicao = Integer.toString((int) (Math.random() * 10));
+                        valida = 0;
+                    }
+                    jogar.Jogada(posicao, "O");
+                    valida = 1;
+
+                } while (valida == 0); //fim jog 1
                 System.out.println("A máquina jogou: \n");
                 jogada++;
                 valida = 0;
                 jogar.Mostrar();
-                
-            if(!jogar.Ganhou(jogada, jogador).equals("null")){
-                break;
-            }  
-        }   
-            entrarJogo(jogador);
+
+                if (!jogar.Ganhou(jogada, jogador).equals("null")) {
+                    break;
+                }
             }
+            entrarJogo(jogador);
+        }
     }
 }

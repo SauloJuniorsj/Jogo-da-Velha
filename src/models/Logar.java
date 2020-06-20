@@ -21,17 +21,15 @@ import java.sql.Statement;
  */
 public class Logar extends Jogador{
     
-    public boolean Autenticar(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+    public void Autenticar(controllers.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
     
-        
-        
-       if(jogador.getNome()!= null && jogador.getSenha() != null && !jogador.getNome().isEmpty() && !jogador.getSenha().isEmpty()){
-           
             Conexao con = new Conexao();
             Placar placar = new Placar();
             Jogar jogo = new Jogar();   
-            Statement st = con.conexao.createStatement();
-            
+            Statement st = Conexao.conexao.createStatement();
+        
+       if(jogador.getNome()!= null && jogador.getSenha() != null && !jogador.getNome().isEmpty() && !jogador.getSenha().isEmpty()){
+           
             MessageDigest senhaCriptografada=MessageDigest.getInstance("MD5");//criptografa a senha
             
             byte[] senhabytes = jogador.getSenha().getBytes();
@@ -50,8 +48,8 @@ public class Logar extends Jogador{
                 if((jogador.getNome() == null ? usuario == null : jogador.getNome().equals(usuario)) && (jogador.getSenha() == null ? senha2 == null : jujuba.equals(senha2))){
                     System.out.println("\n--------- Logado com sucesso ---------\n"
                             + "bem vindo " + usuario);
-                    return true;
-//                    placar.mostrarPlacar(jogador);
+                    con.closeConnection();
+                    placar.mostrarPlacar(jogador);
 //                    jogo.entrarJogo(jogador);
                 } else {
                     System.out.println("Nome ou Senha incorretos!!");
@@ -60,6 +58,5 @@ public class Logar extends Jogador{
        } else {
            System.out.println("Preencha os dados com seu nome e senha de seu cadastro!!");
        }
-       return false;
     }
 }

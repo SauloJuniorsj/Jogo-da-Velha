@@ -25,7 +25,7 @@ public class Cadastrar extends Jogador {
               
         Conexao con = new Conexao();
             
-        Statement st = con.conexao.createStatement();
+        Statement st = Conexao.conexao.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM jogador WHERE nome_jogador = '"
                         + jogador.getNome() +"'");//Select na tabela jogador
         while(rs.next()){
@@ -59,6 +59,7 @@ public class Cadastrar extends Jogador {
                         " values ('" + jogador.getNome() + "', '" + jujuba + "',0,0)");
                     System.out.println("Cadastro realizado com sucesso");
                     Logar entrar = new Logar();
+                    con.closeConnection();
                     entrar.Autenticar(jogador);
                 }
     }
