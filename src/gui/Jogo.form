@@ -88,9 +88,9 @@
                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtvisor_vitoria" min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="txtvisor_derrota" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="txtvisor_derrota" pref="54" max="32767" attributes="0"/>
+                  <Component id="txtvisor_vitoria" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="15" max="32767" attributes="0"/>
               <Component id="txtvisor" min="-2" pref="52" max="-2" attributes="0"/>

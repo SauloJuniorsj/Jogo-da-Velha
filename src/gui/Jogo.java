@@ -22,7 +22,7 @@ public class Jogo extends javax.swing.JFrame {
     public int contpos = 0;
     public int k = 0, i = 0;
     int op;
-    private String vitoria, derrota, nome;
+    private String vitoria, derrota, nome,placarderrota;
     public String linha1, linha2, linha3, coluna1, coluna2, coluna3, diagonal1, diagonal2;
     String[][]posvetor = new String[3][3];
     
@@ -242,9 +242,9 @@ public class Jogo extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtvisor_vitoria, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtvisor_derrota, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtvisor_derrota, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                    .addComponent(txtvisor_vitoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(txtvisor, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -331,6 +331,8 @@ public class Jogo extends javax.swing.JFrame {
         Placar placar = new Placar();
         String tratar = placar.vitoria(this.jogador);
         String nomeJogador = placar.mostrarPlacar(this.jogador);
+        String Placarderrota = placar.derrota(this.jogador);
+        this.placarderrota = Placarderrota;
         this.nome = nomeJogador;
         this.vitoria = tratar.substring(0,tratar.indexOf("/"));
         this.derrota = tratar.substring(tratar.indexOf("/")+1);
@@ -357,6 +359,10 @@ public class Jogo extends javax.swing.JFrame {
            DesabilitaBotoes();
         } else if(linha1.equals("OOO") | linha2.equals("OOO") | linha3.equals("OOO") | coluna1.equals("OOO") | coluna2.equals("OOO") | coluna3.equals("OOO") | diagonal1.equals("OOO") | diagonal2.equals("OOO")){
             txtvisor.setText("Jogador 2 venceu!!");
+            txtvisor_nome.setText(this.nome);
+            txtvisor_vitoria.setText(this.vitoria);
+            txtvisor_derrota.setText(this.placarderrota);
+            
             DesabilitaBotoes();
         } else if (contpos == 9) {
             txtvisor.setText("Deu velha!");

@@ -59,7 +59,7 @@ public class Placar {
         return "";
     }
     
-    public void derrota(modelo.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+    public String derrota(modelo.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
         
         ConnectionFactory con = new ConnectionFactory();
         Statement st = con.conexao.createStatement();
@@ -73,6 +73,8 @@ public class Placar {
             String derrota = rs.getString("derrota");   
             System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console
             con.closeConnection();
+            return derrota;
         }
+        return "";
     }
 }
