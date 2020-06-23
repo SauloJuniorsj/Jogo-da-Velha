@@ -6,7 +6,7 @@
 package dao;
 
 import factory.ConnectionFactory;
-import gui.TelaInicial;
+import gui.Jogo;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,18 +18,17 @@ import java.sql.Statement;
  */
 public class Placar {
     
-    public String mostrarPlacar(modelo.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
+    public String mostrarNome(modelo.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
         
         ConnectionFactory con = new ConnectionFactory();
-        
         Statement st = con.conexao.createStatement();
+        
         ResultSet rs = st.executeQuery("SELECT * FROM jogador WHERE nome_jogador = '" + jogador.getNome() + "'");
         
         while(rs.next()) {
-            String vitoria = rs.getString("vitoria");
-            String derrota = rs.getString("derrota");   
+             
             String nome = rs.getString("nome_jogador");
-            System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console
+            System.out.println("Jogador: " + nome);//mostra os dados da tabela jogador no console
             con.closeConnection();
             
             return nome;
@@ -41,6 +40,8 @@ public class Placar {
         
         ConnectionFactory con = new ConnectionFactory();
         Statement st = con.conexao.createStatement();
+        Jogo jogar = new Jogo();
+        
         st.executeUpdate("UPDATE jogador SET vitoria = vitoria + 1 WHERE nome_jogador = '" 
                 + jogador.getNome()+"'");
         
@@ -50,8 +51,7 @@ public class Placar {
             String vitoria = rs.getString("vitoria");
             String derrota = rs.getString("derrota"); 
             
-            System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console
-            
+            System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console   
             con.closeConnection();
             return vitoria + "/" + derrota;
         }
@@ -63,6 +63,7 @@ public class Placar {
         
         ConnectionFactory con = new ConnectionFactory();
         Statement st = con.conexao.createStatement();
+        
         st.executeUpdate("UPDATE jogador SET `derrota` = `derrota` + 1 where `nome_jogador` = '" 
                 + jogador.getNome()+"'");
         
@@ -73,7 +74,8 @@ public class Placar {
             String derrota = rs.getString("derrota");   
             System.out.println("Vitórias: " + vitoria + "\nDerrotas: " + derrota);//mostra os dados da tabela jogador no console
             con.closeConnection();
-            return derrota;
+            
+            return vitoria + "/" + derrota;
         }
         return "";
     }

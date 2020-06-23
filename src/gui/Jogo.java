@@ -8,6 +8,8 @@ package gui;
 import dao.Placar;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Jogador;
 
 /**
@@ -22,7 +24,7 @@ public class Jogo extends javax.swing.JFrame {
     public int contpos = 0;
     public int k = 0, i = 0;
     int op;
-    private String vitoria, derrota, nome,placarderrota;
+    private String vitoria, derrota, nome, vitoria2, derrota2, nome2;
     public String linha1, linha2, linha3, coluna1, coluna2, coluna3, diagonal1, diagonal2;
     String[][]posvetor = new String[3][3];
     
@@ -31,6 +33,11 @@ public class Jogo extends javax.swing.JFrame {
     public void recebeJogador(Jogador jogador) throws SQLException, NoSuchAlgorithmException{
         this.jogador = jogador;
         consultaPlacar();
+    }
+    
+    public void recebePerdedor(Jogador jogador) throws SQLException, NoSuchAlgorithmException{
+        this.jogador = jogador;
+        consultaDerrota();
     }
     
     public Jogo() {
@@ -238,9 +245,9 @@ public class Jogo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtvisor_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtvisor_derrota, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
@@ -330,15 +337,26 @@ public class Jogo extends javax.swing.JFrame {
         
         Placar placar = new Placar();
         String tratar = placar.vitoria(this.jogador);
-        String nomeJogador = placar.mostrarPlacar(this.jogador);
-        String Placarderrota = placar.derrota(this.jogador);
-        this.placarderrota = Placarderrota;
+        String nomeJogador = placar.mostrarNome(this.jogador);
+
         this.nome = nomeJogador;
         this.vitoria = tratar.substring(0,tratar.indexOf("/"));
         this.derrota = tratar.substring(tratar.indexOf("/")+1);
     }
     
-    public void vitoria(){
+     public void consultaDerrota() throws SQLException, NoSuchAlgorithmException{
+        
+        Placar placar = new Placar();
+        String tratar = placar.derrota(this.jogador);
+        String nomeJogador = placar.mostrarNome(this.jogador);
+
+        this.nome2 = nomeJogador;
+        this.vitoria2 = tratar.substring(0,tratar.indexOf("/"));
+        this.derrota2 = tratar.substring(tratar.indexOf("/")+1);
+    }
+    
+    public void vitoria() throws SQLException, NoSuchAlgorithmException{
+        
         linha1 = posvetor[0][0] + posvetor[0][1] + posvetor[0][2];
         linha2 = posvetor[1][0] + posvetor[1][1] + posvetor[1][2];
         linha3 = posvetor[2][0] + posvetor[2][1] + posvetor[2][2];
@@ -352,6 +370,7 @@ public class Jogo extends javax.swing.JFrame {
         
         if(linha1.equals("XXX") | linha2.equals("XXX") | linha3.equals("XXX") | coluna1.equals("XXX") | coluna2.equals("XXX") | coluna3.equals("XXX") | diagonal1.equals("XXX") | diagonal2.equals("XXX")) {
            txtvisor.setText("Vencedor(a) " + this.nome);
+           consultaPlacar();
            txtvisor_nome.setText(this.nome);
            txtvisor_vitoria.setText(this.vitoria);
            txtvisor_derrota.setText(this.derrota);
@@ -359,10 +378,11 @@ public class Jogo extends javax.swing.JFrame {
            DesabilitaBotoes();
         } else if(linha1.equals("OOO") | linha2.equals("OOO") | linha3.equals("OOO") | coluna1.equals("OOO") | coluna2.equals("OOO") | coluna3.equals("OOO") | diagonal1.equals("OOO") | diagonal2.equals("OOO")){
             txtvisor.setText("Jogador 2 venceu!!");
-            txtvisor_nome.setText(this.nome);
-            txtvisor_vitoria.setText(this.vitoria);
-            txtvisor_derrota.setText(this.placarderrota);
-            
+            consultaDerrota();
+            txtvisor_nome.setText(this.nome2);
+            txtvisor_vitoria.setText(this.vitoria2);
+            txtvisor_derrota.setText(this.derrota2);
+
             DesabilitaBotoes();
         } else if (contpos == 9) {
             txtvisor.setText("Deu velha!");
@@ -383,7 +403,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn1.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn1ActionPerformed
 
@@ -400,7 +426,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn2.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn2ActionPerformed
 
@@ -417,7 +449,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn3.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn3ActionPerformed
 
@@ -434,7 +472,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn4.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn4ActionPerformed
 
@@ -451,7 +495,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn5.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn5ActionPerformed
 
@@ -468,7 +518,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn6.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn6ActionPerformed
 
@@ -485,7 +541,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn7.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn7ActionPerformed
 
@@ -502,7 +564,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn8.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn8ActionPerformed
 
@@ -519,7 +587,13 @@ public class Jogo extends javax.swing.JFrame {
         
         btn9.setEnabled(false);
         verificaPos();
-        vitoria();
+        try {
+            vitoria();
+        } catch (SQLException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Jogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btn9ActionPerformed
 
@@ -544,9 +618,9 @@ public class Jogo extends javax.swing.JFrame {
         btn9.setText("");
         btn9.setEnabled(true);
         limpaPosicao();
-        txtvisor.setText("");
-        txtvisor_vitoria.setText("");
-        txtvisor_derrota.setText("");
+//        txtvisor.setText("");
+//        txtvisor_vitoria.setText("");
+//        txtvisor_derrota.setText("");
         joga = true;
         jogb = true;
     }//GEN-LAST:event_btnreiniciarActionPerformed

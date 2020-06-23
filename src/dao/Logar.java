@@ -24,10 +24,6 @@ public class Logar {
     
     public boolean Autenticar(modelo.Jogador jogador) throws SQLException, NoSuchAlgorithmException {
     
-        
-        
-       if(jogador.getNome()!= null && jogador.getSenha() != null && !jogador.getNome().isEmpty() && !jogador.getSenha().isEmpty()){
-           
             ConnectionFactory con = new ConnectionFactory(); 
             Jogo jogar = new Jogo();
             Statement st = con.conexao.createStatement();
@@ -43,11 +39,11 @@ public class Logar {
             ResultSet rs = st.executeQuery("Select * from jogador where nome_jogador = '" + jogador.getNome()+"'"
                                            + " and senha = '"+ jujuba +"'");
             
-            while(rs.next()){
+            if(rs.next()){
                 String usuario = rs.getString("nome_jogador");
-                String senha2 = rs.getString("senha");
+//                String senha2 = rs.getString("senha");
                 
-                if((jogador.getNome() == null ? usuario == null : jogador.getNome().equals(usuario)) && (jogador.getSenha() == null ? senha2 == null : jujuba.equals(senha2))){
+                
                     System.out.println("\n--------- Logado com sucesso ---------\n"
                             + "bem vindo " + usuario);
                     con.closeConnection();
@@ -55,22 +51,15 @@ public class Logar {
                     JOptionPane.showMessageDialog(rootPane, "Logado com sucesso bem vindo\n" + usuario, "Aviso", JOptionPane.INFORMATION_MESSAGE, null);
                     
                     jogar.recebeJogador(jogador);
+                    jogar.recebePerdedor(jogador);
                     jogar.setVisible(true);           
                     return true;
-                    
-//                    placar.mostrarPlacar(jogador);
-//                    jogo.entrarJogo(jogador);
-                } else {
-                    System.out.println("Nome ou Senha incorretos!!");
-                    Component rootPane = null;
-                    JOptionPane.showMessageDialog(rootPane, "Nome ou senha incorretos!!", "Aviso", JOptionPane.ERROR_MESSAGE, null);
-                }
-            }   
-       } else {
-           System.out.println("Preencha os dados com seu nome e senha de seu cadastro!!");
-           Component rootPane = null;
-           JOptionPane.showMessageDialog(rootPane, "Preencha todos os dados!", "Aviso", JOptionPane.ERROR_MESSAGE, null);
-       }
+                }  
+            
+            if (!rs.next()){
+                Component rootPane = null;
+                JOptionPane.showMessageDialog(rootPane, "Usuario não existe\n ou senha e nome incorretos", "Aviso", JOptionPane.INFORMATION_MESSAGE, null);
+            }
        return false;
     }
 }
