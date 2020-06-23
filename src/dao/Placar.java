@@ -6,7 +6,6 @@
 package dao;
 
 import factory.ConnectionFactory;
-import gui.Jogo;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +39,6 @@ public class Placar {
         
         ConnectionFactory con = new ConnectionFactory();
         Statement st = con.conexao.createStatement();
-        Jogo jogar = new Jogo();
         
         st.executeUpdate("UPDATE jogador SET vitoria = vitoria + 1 WHERE nome_jogador = '" 
                 + jogador.getNome()+"'");

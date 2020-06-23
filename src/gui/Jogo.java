@@ -35,10 +35,10 @@ public class Jogo extends javax.swing.JFrame {
         consultaPlacar();
     }
     
-    public void recebePerdedor(Jogador jogador) throws SQLException, NoSuchAlgorithmException{
-        this.jogador = jogador;
-        consultaDerrota();
-    }
+//    public void recebePerdedor(Jogador jogador) throws SQLException, NoSuchAlgorithmException{
+//        this.jogador = jogador;
+//        consultaDerrota();
+//    }
     
     public Jogo() {
         initComponents();        

@@ -51,7 +51,6 @@ public class Logar {
                     JOptionPane.showMessageDialog(rootPane, "Logado com sucesso bem vindo\n" + usuario, "Aviso", JOptionPane.INFORMATION_MESSAGE, null);
                     
                     jogar.recebeJogador(jogador);
-                    jogar.recebePerdedor(jogador);
                     jogar.setVisible(true);           
                     return true;
                 }  
